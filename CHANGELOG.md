@@ -4,6 +4,85 @@ All notable changes to this project will be documented in this file.
 
 This project follows a candidate-release style during early protocol formation.
 
+## v0.5.0-candidate
+
+Fifth candidate release of the Computational Pranayama Protocol.
+
+This release introduces the **Compute Royalty Link**, a record for connecting regulated computation with compute access and value return policies.
+
+Where v0.1 defines one regulated breath, v0.2 defines reusable kata, v0.3 defines where computation should flow, and v0.4 links computation to trace, v0.5 links saved computation and traceable origin contribution to value return.
+
+This release closes the first arc of the protocol:
+
+```text
+Breath
+→ Kata
+→ Route
+→ Trace
+→ Return
+```
+
+### Added
+
+* Added `Compute Royalty Link` as the fifth core record type.
+* Added schema for `compute-royalty-link`.
+* Added YAML example for a valid compute royalty link.
+* Added `linked_records` fields for connecting breath cycle, kata memory, routing decision, and breath trace link records.
+* Added `compute_saving` fields for recording avoided recomputation and avoided cloud escalation.
+* Added `compute_access` fields for connecting computation to access policy.
+* Added `value_return` fields for linking traceable origin and royalty-compatible references.
+* Added `allocation_policy` fields for describing contribution-based allocation candidates.
+* Added `trace` fields for connecting the record to trace-compatible systems.
+* Added `status` fields for lifecycle and review state.
+* Updated validation script to validate v0.1 through v0.5 examples.
+
+### Validation
+
+The v0.5 schema and example passed validation.
+
+Expected validation output:
+
+```text
+[validate] Computational Breath Cycle
+  schema : schemas/computational-breath-cycle.schema.json
+  example: examples/computational-breath-cycle.example.yaml
+[ok] Computational Breath Cycle example is valid
+[validate] Kata Memory Record
+  schema : schemas/kata-memory-record.schema.json
+  example: examples/kata-memory-record.example.yaml
+[ok] Kata Memory Record example is valid
+[validate] Edge First Routing Decision
+  schema : schemas/edge-first-routing-decision.schema.json
+  example: examples/edge-first-routing-decision.example.yaml
+[ok] Edge First Routing Decision example is valid
+[validate] Breath Trace Link
+  schema : schemas/breath-trace-link.schema.json
+  example: examples/breath-trace-link.example.yaml
+[ok] Breath Trace Link example is valid
+[validate] Compute Royalty Link
+  schema : schemas/compute-royalty-link.schema.json
+  example: examples/compute-royalty-link.example.yaml
+[ok] Compute Royalty Link example is valid
+```
+
+### Core Principle
+
+> Saved compute should return value to traceable origin.
+
+### Japanese Core Principle
+
+> 節約された計算は、痕跡ある震源へ還流せよ。
+
+### Positioning
+
+v0.5 turns flowing computation into accountable computation.
+
+The protocol no longer only asks whether computation should be regulated, reused, routed, or traced.
+
+It now asks whether saved computation and traceable contribution can be linked to value return.
+
+This closes the first arc of the Computational Pranayama Protocol.
+
 ## v0.4.0-candidate
 
 Fourth candidate release of the Computational Pranayama Protocol.
