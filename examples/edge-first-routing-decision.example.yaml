@@ -1,0 +1,87 @@
+routing_decision_id: route-2026-0001
+protocol: computational-pranayama-protocol
+version: 0.3.0-candidate
+
+task:
+  task_type: protocol_documentation_update
+  description: Update README and CHANGELOG using existing kata and local context.
+  privacy_sensitivity: low
+  compute_intensity: low
+
+available_layers:
+  - layer: local
+    available: true
+    sufficient: true
+  - layer: edge_npu
+    available: true
+    sufficient: true
+  - layer: small_model
+    available: true
+    sufficient: true
+  - layer: cloud
+    available: true
+    sufficient: true
+  - layer: frontier_model
+    available: true
+    sufficient: true
+
+routing_assessment:
+  local_sufficiency: sufficient
+  kata_available: true
+  latency_tolerance: medium
+  cloud_needed: false
+  frontier_needed: false
+
+selected_layer:
+  layer: local
+  reason: Existing kata and local context are sufficient; no cloud escalation is required.
+  cloud_escalation_required: false
+
+cloud_escalation_policy:
+  escalation_allowed: true
+  escalation_reason_required: true
+  allowed_triggers:
+    - local_insufficient
+    - fresh_external_information_required
+    - human_requested_escalation
+    - safety_review_required
+
+fallback_policy:
+  fallback_allowed: true
+  fallback_order:
+    - local
+    - edge_npu
+    - small_model
+    - cloud
+    - frontier_model
+
+trace:
+  trace_required: true
+  trace_reference: computational-breath-cycle-compatible
+
+import json
+from pathlib import Path
+
+import yaml
+from jsonschema import Draft202012Validator
+
+
+ROOT = Path(__file__).resolve().parents[1]
+
+VALIDATIONS = [
+    {
+        "name": "Computational Breath Cycle",
+        "schema": ROOT / "schemas" / "computational-breath-cycle.schema.json",
+        "example": ROOT / "examples" / "computational-breath-cycle.example.yaml",
+    },
+    {
+        "name": "Kata Memory Record",
+        "schema": ROOT / "schemas" / "kata-memory-record.schema.json",
+        "example": ROOT / "examples" / "kata-memory-record.example.yaml",
+    },
+    {
+        "name": "Edge First Routing Decision",
+        "schema": ROOT / "schemas" / "edge-first-routing-decision.schema.json",
+        "example": ROOT / "examples" / "edge-first-routing-decision.example.yaml",
+    },
+]
