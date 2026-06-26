@@ -4,6 +4,66 @@ All notable changes to this project will be documented in this file.
 
 This project follows a candidate-release style during early protocol formation.
 
+## v0.2.0-candidate
+
+Second candidate release of the Computational Pranayama Protocol.
+
+This release introduces the **Kata Memory Record**, a reusable computation pattern record for reducing redundant recomputation.
+
+The v0.2 scope expands the v0.1 Reuse Gate into a standalone reusable pattern layer.
+
+Where v0.1 defines one regulated breath, v0.2 defines a remembered kata that can be reused across future breath cycles.
+
+### Added
+
+* Added `Kata Memory Record` as the second core record type.
+* Added schema for `kata-memory-record`.
+* Added YAML example for a valid kata memory record.
+* Expanded the v0.1 Reuse Gate into a standalone reusable pattern layer.
+* Added `source` fields for linking a kata to its originating breath cycle and task type.
+* Added `kata` fields for name, description, pattern type, reusable parts, non-reusable parts, and stability.
+* Added `reuse_policy` fields for reuse permission, reuse mode, and minimum similarity score.
+* Added `delta_policy` fields for delta-only computation.
+* Added `recompute_policy` fields for defining when full recomputation is allowed.
+* Added `verification` fields for verification requirements and scope.
+* Added `trace` fields for trace requirement and trace reference.
+* Updated validation script to validate both v0.1 and v0.2 examples.
+
+### Validation
+
+The v0.2 schema and example passed validation.
+
+Expected validation output:
+
+```text
+[validate] Computational Breath Cycle
+  schema : schemas/computational-breath-cycle.schema.json
+  example: examples/computational-breath-cycle.example.yaml
+[ok] Computational Breath Cycle example is valid
+[validate] Kata Memory Record
+  schema : schemas/kata-memory-record.schema.json
+  example: examples/kata-memory-record.example.yaml
+[ok] Kata Memory Record example is valid
+```
+
+### Core Principle
+
+> Reuse the kata. Compute only the delta.
+
+### Japanese Core Principle
+
+> 型を使え。差分だけ計算せよ。
+
+### Positioning
+
+v0.2 turns repeated computation into reusable structure.
+
+The protocol no longer only asks whether computation should be regulated.
+
+It now asks whether the computation has already become a traceable pattern that should be reused instead of recomputed.
+
+This is the first step from regulated computation toward remembered computation.
+
 ## v0.1.0-candidate
 
 Initial candidate release of the Computational Pranayama Protocol.
@@ -71,3 +131,4 @@ The aim is not to maximize computation.
 The aim is to reduce wasteful computation by making AI compute only what is necessary, where it is necessary, when it is necessary.
 
 Compute like wind.
+
