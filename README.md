@@ -52,6 +52,77 @@ In this version, the protocol does not attempt to control all AI infrastructure.
 
 Instead, it defines a minimal structure for observing and validating whether a single act of computation is aligned, non-redundant, and sufficiently lightweight.
 
+## v0.2 Positioning
+
+v0.2 introduces the **Kata Memory Record**.
+
+A Kata Memory Record captures a reusable computation pattern that should not be recomputed from scratch once it has become stable and traceable.
+
+This expands the v0.1 Reuse Gate into a standalone reusable pattern layer.
+
+The purpose is to reduce redundant AI computation by storing reusable structures such as:
+
+* protocol definition patterns
+* release note patterns
+* schema design patterns
+* validation flow patterns
+* reasoning templates
+* output formatting patterns
+
+The core question of v0.2 is:
+
+> Has this computation already become a reusable kata?
+
+If yes, the system should reuse the existing pattern and compute only the necessary delta.
+
+## v0.2 Flow
+
+```text
+A computation pattern appears repeatedly.
+The pattern becomes stable.
+The pattern is recorded as a Kata Memory Record.
+Future tasks check whether the kata applies.
+If applicable, the system reuses the kata.
+Only the delta is computed.
+Trace is attached.
+```
+
+日本語では：
+
+```text
+同じ計算構造が何度も現れる。
+その構造が安定する。
+型記憶として記録する。
+次回以降、その型が使えるか確認する。
+使えるなら型を再利用する。
+差分だけ計算する。
+痕跡を残す。
+```
+
+## Relationship Between v0.1 and v0.2
+
+```text
+v0.1 = one regulated breath
+v0.2 = remembered kata for reducing repeated breath
+```
+
+日本語では：
+
+```text
+v0.1 = 1回の計算呼吸を整える
+v0.2 = 繰り返し現れる計算構造を型として記憶する
+```
+
+v0.1 asks:
+
+> Is this computation aligned, non-redundant, and sufficiently lightweight?
+
+v0.2 asks:
+
+> Has this computation already become a reusable pattern?
+
+Together, they form the first practical layer of flowing computation.
+
 ## Minimal Flow
 
 ```text
@@ -138,39 +209,58 @@ It records:
 
 This ensures that computation does not disappear as untraceable exhaust.
 
+## Core Records
+
+### Computational Breath Cycle
+
+The Computational Breath Cycle is the v0.1 record type.
+
+Schema:
+
+```text
+schemas/computational-breath-cycle.schema.json
+```
+
+Example:
+
+```text
+examples/computational-breath-cycle.example.yaml
+```
+
+### Kata Memory Record
+
+The Kata Memory Record is the v0.2 record type.
+
+Schema:
+
+```text
+schemas/kata-memory-record.schema.json
+```
+
+Example:
+
+```text
+examples/kata-memory-record.example.yaml
+```
+
 ## Repository Structure
 
 ```text
 computational-pranayama-protocol/
 ├── README.md
 ├── CHANGELOG.md
+├── .github/
+│   └── workflows/
+│       └── validate.yml
 ├── schemas/
-│   └── computational-breath-cycle.schema.json
+│   ├── computational-breath-cycle.schema.json
+│   └── kata-memory-record.schema.json
 ├── examples/
-│   └── computational-breath-cycle.example.yaml
+│   ├── computational-breath-cycle.example.yaml
+│   └── kata-memory-record.example.yaml
 └── scripts/
     └── validate_examples.py
 ```
-
-## Schema
-
-The v0.1 schema is located at:
-
-```text
-schemas/computational-breath-cycle.schema.json
-```
-
-It defines the required structure for a Computational Breath Cycle record.
-
-## Example
-
-The v0.1 example is located at:
-
-```text
-examples/computational-breath-cycle.example.yaml
-```
-
-It demonstrates a minimal valid breath cycle with alignment, reuse, kumbhaka, routing, and exhalation records.
 
 ## Validation
 
@@ -187,22 +277,28 @@ Expected result:
   schema : schemas/computational-breath-cycle.schema.json
   example: examples/computational-breath-cycle.example.yaml
 [ok] Computational Breath Cycle example is valid
+[validate] Kata Memory Record
+  schema : schemas/kata-memory-record.schema.json
+  example: examples/kata-memory-record.example.yaml
+[ok] Kata Memory Record example is valid
 ```
 
-## v0.1 Scope
+## Current Scope
 
-v0.1 includes:
+The current protocol includes:
 
-* Computational Breath Cycle definition
+* Computational Breath Cycle
 * Alignment Gate
 * Reuse Gate
 * Kumbhaka Gate
 * Routing Gate
 * Exhalation Record
+* Kata Memory Record
 * JSON Schema validation
-* YAML example
+* YAML examples
+* GitHub Actions validation
 
-v0.1 does not yet include:
+It does not yet include:
 
 * Royalty OS integration
 * Agent hooks
@@ -216,7 +312,7 @@ v0.1 does not yet include:
 | Version | Theme                      | Description                                                                |
 | ------- | -------------------------- | -------------------------------------------------------------------------- |
 | v0.1    | Computational Breath Cycle | Defines the minimal unit of regulated computation                          |
-| v0.2    | Reuse / Kata Memory        | Expands reusable pattern records and recomputation control                 |
+| v0.2    | Reuse / Kata Memory        | Records reusable computation patterns and delta-only recomputation         |
 | v0.3    | Edge First Routing         | Adds lightweight execution routing and Local First policies                |
 | v0.4    | Trace Integration          | Links breath cycles with AI Search Trace Receipt records                   |
 | v0.5    | Compute / Royalty Link     | Connects computation control with value return and compute access policies |
@@ -225,11 +321,19 @@ v0.1 does not yet include:
 
 Computational Pranayama Protocol is a civilization-layer protocol for reducing overcompute.
 
-It treats computation not as an unlimited fire, but as a breath that must be aligned, paused, routed, and traced.
+It treats computation not as an unlimited fire, but as a breath that must be aligned, paused, routed, reused, and traced.
 
 The protocol begins from a simple premise:
 
 > Wasteful computation is not intelligence.
 > Reusable pattern, sufficient output, and traceable flow are intelligence.
+
+v0.2 sharpens this premise into a second principle:
+
+> Reuse the kata. Compute only the delta.
+
+Japanese:
+
+> 型を使え。差分だけ計算せよ。
 
 Compute like wind.
