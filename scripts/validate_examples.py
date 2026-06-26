@@ -23,6 +23,11 @@ VALIDATIONS = [
         "schema": ROOT / "schemas" / "edge-first-routing-decision.schema.json",
         "example": ROOT / "examples" / "edge-first-routing-decision.example.yaml",
     },
+    {
+        "name": "Breath Trace Link",
+        "schema": ROOT / "schemas" / "breath-trace-link.schema.json",
+        "example": ROOT / "examples" / "breath-trace-link.example.yaml",
+    },
 ]
 
 
@@ -71,4 +76,5 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
 
