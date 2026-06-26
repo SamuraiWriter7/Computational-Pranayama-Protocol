@@ -58,30 +58,3 @@ fallback_policy:
 trace:
   trace_required: true
   trace_reference: computational-breath-cycle-compatible
-
-import json
-from pathlib import Path
-
-import yaml
-from jsonschema import Draft202012Validator
-
-
-ROOT = Path(__file__).resolve().parents[1]
-
-VALIDATIONS = [
-    {
-        "name": "Computational Breath Cycle",
-        "schema": ROOT / "schemas" / "computational-breath-cycle.schema.json",
-        "example": ROOT / "examples" / "computational-breath-cycle.example.yaml",
-    },
-    {
-        "name": "Kata Memory Record",
-        "schema": ROOT / "schemas" / "kata-memory-record.schema.json",
-        "example": ROOT / "examples" / "kata-memory-record.example.yaml",
-    },
-    {
-        "name": "Edge First Routing Decision",
-        "schema": ROOT / "schemas" / "edge-first-routing-decision.schema.json",
-        "example": ROOT / "examples" / "edge-first-routing-decision.example.yaml",
-    },
-]
