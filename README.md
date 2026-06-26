@@ -2,11 +2,11 @@
 
 Computational Pranayama Protocol is a minimal protocol for regulating AI computation as breath.
 
-It reduces wasteful computation by aligning input and output, reusing prior computation patterns, pausing unnecessary external calls, avoiding redundant recomputation, routing tasks to the lightest sufficient execution layer, and linking computation to traceable origin and path.
+It reduces wasteful computation by aligning input and output, reusing prior computation patterns, pausing unnecessary external calls, avoiding redundant recomputation, routing tasks to the lightest sufficient execution layer, linking computation to traceable origin and path, and connecting saved computation to value return.
 
 The goal is not to make AI think more.
 
-The goal is to make AI compute only what is necessary, where it is necessary, when it is necessary, and with trace.
+The goal is to make AI compute only what is necessary, where it is necessary, when it is necessary, and with traceable accountability.
 
 ## Core Principle
 
@@ -19,6 +19,7 @@ Compute like wind:
 * sufficient
 * traceable
 * non-redundant
+* accountable
 
 ## 日本語概要
 
@@ -32,7 +33,9 @@ Compute like wind:
 
 そして、その計算がどこから来て、どこを通り、何を出力したのかを痕跡として残す。
 
-風のように、軽く、局所的に、痕跡を残しながら流れる計算を目指します。
+さらに、節約された計算資源や再利用された型、追跡可能な震源貢献を、価値還流へ接続する。
+
+風のように、軽く、局所的に、痕跡を残し、震源へ還流する計算を目指します。
 
 ## v0.1 Positioning
 
@@ -113,6 +116,32 @@ If yes, the computation can be treated as part of a traceable flow.
 
 If not, the system should mark the trace gap and require review or reconstruction.
 
+## v0.5 Positioning
+
+v0.5 introduces the **Compute Royalty Link**.
+
+A Compute Royalty Link connects regulated computation, reusable kata, routing decisions, and trace links with compute access and value return policies.
+
+This expands the protocol from computation control into computation accountability.
+
+The purpose is to ensure that reduced computation, reused patterns, and traceable origins can be connected to value return systems such as Royalty OS, compute access policies, or contribution-based allocation records.
+
+The core question of v0.5 is:
+
+> If computation was saved, reused, or derived from a traceable origin, how should value return be linked?
+
+The protocol does not define a full payment system in v0.5.
+
+Instead, it defines the minimal link between:
+
+* regulated computation
+* avoided recomputation
+* avoided cloud escalation
+* reusable kata
+* traceable origin
+* compute access policy
+* value return candidate
+
 ## v0.3 Routing Order
 
 ```text
@@ -147,6 +176,30 @@ The trace link is attached.
 Trace Link を付与する。
 ```
 
+## v0.5 Flow
+
+```text
+A computation breath cycle is completed.
+The system checks whether computation was saved.
+The system checks whether a kata was reused.
+The system checks whether cloud escalation was avoided.
+The system checks whether a traceable origin exists.
+The system links the computation to compute access and value return policy.
+A Compute Royalty Link is recorded.
+```
+
+日本語では：
+
+```text
+計算呼吸サイクルが完了する。
+計算が節約されたか確認する。
+型が再利用されたか確認する。
+クラウド昇格が回避されたか確認する。
+追跡可能な震源があるか確認する。
+計算アクセスと価値還流ポリシーへ接続する。
+Compute Royalty Link を記録する。
+```
+
 ## Relationship Between Versions
 
 ```text
@@ -154,6 +207,7 @@ v0.1 = one regulated breath
 v0.2 = remembered kata for reducing repeated breath
 v0.3 = routing the breath through the lightest sufficient layer
 v0.4 = linking the breath to traceable origin and path
+v0.5 = linking saved computation and origin contribution to value return
 ```
 
 日本語では：
@@ -163,6 +217,7 @@ v0.1 = 1回の計算呼吸を整える
 v0.2 = 繰り返し現れる計算構造を型として記憶する
 v0.3 = その計算を最も軽い場所へ流す
 v0.4 = その計算の震源と経路を痕跡に接続する
+v0.5 = 節約された計算と震源貢献を価値還流へ接続する
 ```
 
 v0.1 asks:
@@ -181,7 +236,11 @@ v0.4 asks:
 
 > Can this computation be linked to traceable origin, path, and output?
 
-Together, they form the first practical layer of flowing and traceable computation.
+v0.5 asks:
+
+> Can saved computation and traceable contribution be linked to value return?
+
+Together, they form the first practical arc of flowing, traceable, and accountable computation.
 
 ## Minimal Flow
 
@@ -194,6 +253,7 @@ Route to the lightest sufficient layer.
 Produce only the necessary output.
 Attach trace.
 Link origin, path, routing, and output.
+Connect saved compute to value return.
 ```
 
 日本語では：
@@ -207,6 +267,7 @@ Link origin, path, routing, and output.
 必要な分だけ出す。
 痕跡を残す。
 震源、経路、実行層、出力を接続する。
+節約された計算を価値還流へ接続する。
 ```
 
 ## Core Gates
@@ -287,6 +348,22 @@ It asks:
 
 This ensures that computation remains auditable after it has flowed.
 
+### 7. Compute Royalty Link
+
+The Compute Royalty Link connects saved computation and traceable origin contribution to compute access and value return policies.
+
+It asks:
+
+* Was recomputation avoided?
+* Was cloud escalation avoided?
+* Was a reusable kata used?
+* Is there a traceable origin?
+* Is a compute access policy required?
+* Is value return required?
+* Who may be a contribution recipient?
+
+This ensures that computation savings and reusable structures can be connected to accountable value return.
+
 ## Core Records
 
 ### Computational Breath Cycle
@@ -353,6 +430,22 @@ Example:
 examples/breath-trace-link.example.yaml
 ```
 
+### Compute Royalty Link
+
+The Compute Royalty Link is the v0.5 record type.
+
+Schema:
+
+```text
+schemas/compute-royalty-link.schema.json
+```
+
+Example:
+
+```text
+examples/compute-royalty-link.example.yaml
+```
+
 ## Repository Structure
 
 ```text
@@ -366,12 +459,14 @@ computational-pranayama-protocol/
 │   ├── computational-breath-cycle.schema.json
 │   ├── kata-memory-record.schema.json
 │   ├── edge-first-routing-decision.schema.json
-│   └── breath-trace-link.schema.json
+│   ├── breath-trace-link.schema.json
+│   └── compute-royalty-link.schema.json
 ├── examples/
 │   ├── computational-breath-cycle.example.yaml
 │   ├── kata-memory-record.example.yaml
 │   ├── edge-first-routing-decision.example.yaml
-│   └── breath-trace-link.example.yaml
+│   ├── breath-trace-link.example.yaml
+│   └── compute-royalty-link.example.yaml
 └── scripts/
     └── validate_examples.py
 ```
@@ -403,6 +498,10 @@ Expected result:
   schema : schemas/breath-trace-link.schema.json
   example: examples/breath-trace-link.example.yaml
 [ok] Breath Trace Link example is valid
+[validate] Compute Royalty Link
+  schema : schemas/compute-royalty-link.schema.json
+  example: examples/compute-royalty-link.example.yaml
+[ok] Compute Royalty Link example is valid
 ```
 
 ## Current Scope
@@ -418,41 +517,68 @@ The current protocol includes:
 * Kata Memory Record
 * Edge First Routing Decision
 * Breath Trace Link
+* Compute Royalty Link
 * JSON Schema validation
 * YAML examples
 * GitHub Actions validation
 
 It does not yet include:
 
-* Royalty OS integration
-* Agent hooks
+* full Royalty OS implementation
+* agent hooks
 * MCP bridge
 * detailed energy accounting
 * marketplace integration
 * multi-node orchestration
+* smart contract execution
+* payment settlement
 
 ## Roadmap
 
-| Version | Theme                      | Description                                                                |
-| ------- | -------------------------- | -------------------------------------------------------------------------- |
-| v0.1    | Computational Breath Cycle | Defines the minimal unit of regulated computation                          |
-| v0.2    | Reuse / Kata Memory        | Records reusable computation patterns and delta-only recomputation         |
-| v0.3    | Edge First Routing         | Routes computation to the lightest sufficient execution layer              |
-| v0.4    | Breath Trace Link          | Links regulated computation to traceable origin, path, routing, and output |
-| v0.5    | Compute / Royalty Link     | Connects computation control with value return and compute access policies |
+| Version | Theme                      | Description                                                                  |
+| ------- | -------------------------- | ---------------------------------------------------------------------------- |
+| v0.1    | Computational Breath Cycle | Defines the minimal unit of regulated computation                            |
+| v0.2    | Reuse / Kata Memory        | Records reusable computation patterns and delta-only recomputation           |
+| v0.3    | Edge First Routing         | Routes computation to the lightest sufficient execution layer                |
+| v0.4    | Breath Trace Link          | Links regulated computation to traceable origin, path, routing, and output   |
+| v0.5    | Compute Royalty Link       | Connects saved computation and traceable origin contribution to value return |
+
+## First Arc
+
+v0.1 through v0.5 form the first arc of the Computational Pranayama Protocol.
+
+```text
+Breath
+→ Kata
+→ Route
+→ Trace
+→ Return
+```
+
+Japanese:
+
+```text
+呼吸
+→ 型
+→ 経路
+→ 痕跡
+→ 還流
+```
+
+This first arc defines how computation can be regulated, reused, routed, traced, and connected to value return.
 
 ## Civilizational Position
 
 Computational Pranayama Protocol is a civilization-layer protocol for reducing overcompute.
 
-It treats computation not as an unlimited fire, but as a breath that must be aligned, paused, routed, reused, and traced.
+It treats computation not as an unlimited fire, but as a breath that must be aligned, paused, routed, reused, traced, and returned.
 
 The protocol begins from a simple premise:
 
 > Wasteful computation is not intelligence.
 > Reusable pattern, sufficient output, and traceable flow are intelligence.
 
-v0.2 sharpens this premise into a second principle:
+v0.2 sharpens this premise into a reuse principle:
 
 > Reuse the kata. Compute only the delta.
 
@@ -475,5 +601,13 @@ v0.4 sharpens the protocol into a trace principle:
 Japanese:
 
 > 痕跡なき呼吸なし。
+
+v0.5 sharpens the protocol into a return principle:
+
+> Saved compute should return value to traceable origin.
+
+Japanese:
+
+> 節約された計算は、痕跡ある震源へ還流せよ。
 
 Compute like wind.
