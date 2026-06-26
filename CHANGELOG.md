@@ -4,6 +4,70 @@ All notable changes to this project will be documented in this file.
 
 This project follows a candidate-release style during early protocol formation.
 
+## v0.3.0-candidate
+
+Third candidate release of the Computational Pranayama Protocol.
+
+This release introduces the **Edge First Routing Decision**, a routing record for selecting the lightest sufficient execution layer.
+
+The v0.3 scope expands the v0.1 Routing Gate into a standalone execution-routing layer.
+
+Where v0.1 defines one regulated breath and v0.2 defines a reusable kata, v0.3 defines where the computation should flow.
+
+### Added
+
+* Added `Edge First Routing Decision` as the third core record type.
+* Added schema for `edge-first-routing-decision`.
+* Added YAML example for a valid edge-first routing decision.
+* Expanded the v0.1 Routing Gate into a standalone routing layer.
+* Added `task` fields for describing routing target, privacy sensitivity, and compute intensity.
+* Added `available_layers` records for local, edge NPU, small model, cloud, and frontier model availability.
+* Added `routing_assessment` fields for local sufficiency, kata availability, latency tolerance, cloud need, and frontier need.
+* Added `selected_layer` record for final execution-layer selection.
+* Added `cloud_escalation_policy` for controlling when cloud escalation is allowed.
+* Added `fallback_policy` for defining fallback execution order.
+* Added `trace` fields for routing trace requirement and reference.
+* Updated validation script to validate v0.1, v0.2, and v0.3 examples.
+
+### Validation
+
+The v0.3 schema and example passed validation.
+
+Expected validation output:
+
+```text
+[validate] Computational Breath Cycle
+  schema : schemas/computational-breath-cycle.schema.json
+  example: examples/computational-breath-cycle.example.yaml
+[ok] Computational Breath Cycle example is valid
+[validate] Kata Memory Record
+  schema : schemas/kata-memory-record.schema.json
+  example: examples/kata-memory-record.example.yaml
+[ok] Kata Memory Record example is valid
+[validate] Edge First Routing Decision
+  schema : schemas/edge-first-routing-decision.schema.json
+  example: examples/edge-first-routing-decision.example.yaml
+[ok] Edge First Routing Decision example is valid
+```
+
+### Core Principle
+
+> Route to the lightest sufficient layer.
+
+### Japanese Core Principle
+
+> 最も軽く十分な層へ流せ。
+
+### Positioning
+
+v0.3 turns computation control into routing control.
+
+The protocol no longer only asks whether a computation should be regulated or reused.
+
+It now asks where the computation should flow.
+
+This is the first step toward Local First and Edge First computation inside the Computational Pranayama Protocol.
+
 ## v0.2.0-candidate
 
 Second candidate release of the Computational Pranayama Protocol.
@@ -131,4 +195,3 @@ The aim is not to maximize computation.
 The aim is to reduce wasteful computation by making AI compute only what is necessary, where it is necessary, when it is necessary.
 
 Compute like wind.
-
