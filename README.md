@@ -75,35 +75,66 @@ The core question of v0.2 is:
 
 If yes, the system should reuse the existing pattern and compute only the necessary delta.
 
-## v0.2 Flow
+## v0.3 Positioning
+
+v0.3 introduces the **Edge First Routing Decision**.
+
+An Edge First Routing Decision records how a computation task is routed to the lightest sufficient execution layer.
+
+This expands the v0.1 Routing Gate into a standalone routing layer.
+
+The purpose is to reduce unnecessary cloud or frontier-model usage by asking:
+
+> What is the lightest sufficient place to compute this task?
+
+The protocol prefers lower-cost, lower-energy, and more local execution layers before escalating to heavier compute.
+
+Cloud or frontier-model escalation is not forbidden.
+
+However, escalation must have a reason.
+
+## v0.3 Routing Order
 
 ```text
-A computation pattern appears repeatedly.
-The pattern becomes stable.
-The pattern is recorded as a Kata Memory Record.
-Future tasks check whether the kata applies.
-If applicable, the system reuses the kata.
-Only the delta is computed.
+local
+edge_npu
+small_model
+cloud
+frontier_model
+```
+
+The system should escalate only when the lower layer is insufficient.
+
+## v0.3 Flow
+
+```text
+A computation task appears.
+The system checks local sufficiency.
+The system checks whether prior kata can reduce computation.
+The system selects the lightest sufficient execution layer.
+Cloud escalation is allowed only with a reason.
+The routing decision is recorded.
 Trace is attached.
 ```
 
 日本語では：
 
 ```text
-同じ計算構造が何度も現れる。
-その構造が安定する。
-型記憶として記録する。
-次回以降、その型が使えるか確認する。
-使えるなら型を再利用する。
-差分だけ計算する。
+計算タスクが現れる。
+ローカルで足りるか確認する。
+型記憶で軽量化できるか確認する。
+最も軽く十分な実行層を選ぶ。
+クラウド昇格には理由を必要とする。
+ルーティング判断を記録する。
 痕跡を残す。
 ```
 
-## Relationship Between v0.1 and v0.2
+## Relationship Between Versions
 
 ```text
 v0.1 = one regulated breath
 v0.2 = remembered kata for reducing repeated breath
+v0.3 = routing the breath through the lightest sufficient layer
 ```
 
 日本語では：
@@ -111,6 +142,7 @@ v0.2 = remembered kata for reducing repeated breath
 ```text
 v0.1 = 1回の計算呼吸を整える
 v0.2 = 繰り返し現れる計算構造を型として記憶する
+v0.3 = その計算を最も軽い場所へ流す
 ```
 
 v0.1 asks:
@@ -120,6 +152,10 @@ v0.1 asks:
 v0.2 asks:
 
 > Has this computation already become a reusable pattern?
+
+v0.3 asks:
+
+> Where should this computation flow?
 
 Together, they form the first practical layer of flowing computation.
 
@@ -192,8 +228,10 @@ The Routing Gate selects the lightest sufficient execution layer.
 It asks:
 
 * Can this task run locally?
+* Can an edge NPU handle it?
 * Can a small model handle it?
 * Is cloud escalation truly required?
+* Is a frontier model truly required?
 
 This gate prevents unnecessary use of heavier compute layers.
 
@@ -243,6 +281,22 @@ Example:
 examples/kata-memory-record.example.yaml
 ```
 
+### Edge First Routing Decision
+
+The Edge First Routing Decision is the v0.3 record type.
+
+Schema:
+
+```text
+schemas/edge-first-routing-decision.schema.json
+```
+
+Example:
+
+```text
+examples/edge-first-routing-decision.example.yaml
+```
+
 ## Repository Structure
 
 ```text
@@ -254,10 +308,12 @@ computational-pranayama-protocol/
 │       └── validate.yml
 ├── schemas/
 │   ├── computational-breath-cycle.schema.json
-│   └── kata-memory-record.schema.json
+│   ├── kata-memory-record.schema.json
+│   └── edge-first-routing-decision.schema.json
 ├── examples/
 │   ├── computational-breath-cycle.example.yaml
-│   └── kata-memory-record.example.yaml
+│   ├── kata-memory-record.example.yaml
+│   └── edge-first-routing-decision.example.yaml
 └── scripts/
     └── validate_examples.py
 ```
@@ -281,6 +337,10 @@ Expected result:
   schema : schemas/kata-memory-record.schema.json
   example: examples/kata-memory-record.example.yaml
 [ok] Kata Memory Record example is valid
+[validate] Edge First Routing Decision
+  schema : schemas/edge-first-routing-decision.schema.json
+  example: examples/edge-first-routing-decision.example.yaml
+[ok] Edge First Routing Decision example is valid
 ```
 
 ## Current Scope
@@ -294,6 +354,7 @@ The current protocol includes:
 * Routing Gate
 * Exhalation Record
 * Kata Memory Record
+* Edge First Routing Decision
 * JSON Schema validation
 * YAML examples
 * GitHub Actions validation
@@ -313,7 +374,7 @@ It does not yet include:
 | ------- | -------------------------- | -------------------------------------------------------------------------- |
 | v0.1    | Computational Breath Cycle | Defines the minimal unit of regulated computation                          |
 | v0.2    | Reuse / Kata Memory        | Records reusable computation patterns and delta-only recomputation         |
-| v0.3    | Edge First Routing         | Adds lightweight execution routing and Local First policies                |
+| v0.3    | Edge First Routing         | Routes computation to the lightest sufficient execution layer              |
 | v0.4    | Trace Integration          | Links breath cycles with AI Search Trace Receipt records                   |
 | v0.5    | Compute / Royalty Link     | Connects computation control with value return and compute access policies |
 
@@ -335,5 +396,13 @@ v0.2 sharpens this premise into a second principle:
 Japanese:
 
 > 型を使え。差分だけ計算せよ。
+
+v0.3 sharpens the protocol into a routing principle:
+
+> Route to the lightest sufficient layer.
+
+Japanese:
+
+> 最も軽く十分な層へ流せ。
 
 Compute like wind.
