@@ -1,0 +1,223 @@
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/schemas/kata-memory-record.schema.json",
+  "title": "Kata Memory Record",
+  "description": "A reusable computation pattern record for reducing redundant AI recomputation.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "kata_memory_id",
+    "protocol",
+    "version",
+    "source",
+    "kata",
+    "reuse_policy",
+    "delta_policy",
+    "recompute_policy",
+    "verification",
+    "trace"
+  ],
+  "properties": {
+    "kata_memory_id": {
+      "type": "string",
+      "description": "Unique identifier for this kata memory record."
+    },
+    "protocol": {
+      "type": "string",
+      "const": "computational-pranayama-protocol"
+    },
+    "version": {
+      "type": "string"
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_breath_cycle_id",
+        "source_task_type"
+      ],
+      "properties": {
+        "source_breath_cycle_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Optional reference to the breath cycle that produced this reusable kata."
+        },
+        "source_task_type": {
+          "type": "string",
+          "description": "Task type from which this kata was abstracted."
+        }
+      }
+    },
+    "kata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "description",
+        "pattern_type",
+        "reusable_parts",
+        "non_reusable_parts",
+        "stability"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "pattern_type": {
+          "type": "string",
+          "enum": [
+            "protocol_definition",
+            "schema_design",
+            "release_notes",
+            "validation_flow",
+            "documentation_structure",
+            "reasoning_template",
+            "output_format",
+            "other"
+          ]
+        },
+        "reusable_parts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "non_reusable_parts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "stability": {
+          "type": "string",
+          "enum": [
+            "draft",
+            "candidate",
+            "stable",
+            "deprecated"
+          ]
+        }
+      }
+    },
+    "reuse_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "reuse_allowed",
+        "reuse_mode",
+        "minimum_similarity_score"
+      ],
+      "properties": {
+        "reuse_allowed": {
+          "type": "boolean"
+        },
+        "reuse_mode": {
+          "type": "string",
+          "enum": [
+            "reuse_as_is",
+            "reuse_with_delta_update",
+            "reuse_with_verification",
+            "reference_only"
+          ]
+        },
+        "minimum_similarity_score": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "delta_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "delta_required",
+        "delta_fields"
+      ],
+      "properties": {
+        "delta_required": {
+          "type": "boolean"
+        },
+        "delta_fields": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "recompute_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "full_recompute_allowed",
+        "full_recompute_triggers"
+      ],
+      "properties": {
+        "full_recompute_allowed": {
+          "type": "boolean"
+        },
+        "full_recompute_triggers": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "missing_trace",
+              "low_similarity",
+              "changed_requirements",
+              "safety_sensitive_task",
+              "stale_pattern",
+              "human_requested_recheck",
+              "conflict_detected"
+            ]
+          }
+        }
+      }
+    },
+    "verification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "verification_required",
+        "verification_scope"
+      ],
+      "properties": {
+        "verification_required": {
+          "type": "boolean"
+        },
+        "verification_scope": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "trace": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "trace_required",
+        "trace_reference"
+      ],
+      "properties": {
+        "trace_required": {
+          "type": "boolean"
+        },
+        "trace_reference": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    }
+  }
+}
+```
