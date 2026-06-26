@@ -1,0 +1,59 @@
+compute_royalty_link_id: compute-royalty-2026-0001
+protocol: computational-pranayama-protocol
+version: 0.5.0-candidate
+
+linked_records:
+  breath_cycle_id: cpp-2026-0001
+  kata_memory_id: kata-2026-0001
+  routing_decision_id: route-2026-0001
+  breath_trace_link_id: trace-link-2026-0001
+
+compute_saving:
+  baseline_layer: cloud
+  selected_layer: local
+  recomputation_avoided: true
+  cloud_escalation_avoided: true
+  saving_level: high
+  confidence: 0.86
+
+compute_access:
+  access_policy_required: true
+  access_policy_reference: compute-access-royalty-os-compatible
+  execution_allowed: true
+  escalation_requires_policy: true
+  allowed_execution_layers:
+    - local
+    - edge_npu
+    - small_model
+
+value_return:
+  value_return_required: true
+  return_mode: mixed
+  origin_reference: traceable-protocol-origin
+  royalty_os_reference: royalty-os-compatible
+
+allocation_policy:
+  allocation_required: true
+  allocation_basis: mixed
+  recipients:
+    - recipient_type: origin_creator
+      reference: traceable-protocol-origin
+      share_ratio: 0.6
+    - recipient_type: kata_author
+      reference: kata-2026-0001
+      share_ratio: 0.2
+    - recipient_type: trace_provider
+      reference: trace-link-2026-0001
+      share_ratio: 0.1
+    - recipient_type: protocol_maintainer
+      reference: computational-pranayama-protocol
+      share_ratio: 0.1
+
+trace:
+  trace_required: true
+  trace_reference: trace-link-2026-0001
+  trace_receipt_compatible: true
+
+status:
+  link_status: active
+  review_required: false
