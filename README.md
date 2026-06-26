@@ -611,3 +611,89 @@ Japanese:
 > 節約された計算は、痕跡ある震源へ還流せよ。
 
 Compute like wind.
+
+## Civilizational Position
+
+Computational Pranayama Protocol is a civilization-layer protocol for reducing overcompute.
+
+It treats computation not as unlimited fire, but as breath that must be aligned, paused, routed, reused, traced, and returned.
+
+The protocol begins from a simple premise:
+
+> Wasteful computation is not intelligence.
+> Reusable pattern, sufficient output, local execution, traceable flow, and accountable return are intelligence.
+
+v0.1 defines the first regulated breath.
+
+> Do not recompute what has already become a traceable pattern.
+
+Japanese:
+
+> 痕跡ある型となったものを、二度ゼロから考えるな。
+
+v0.2 sharpens this into a reuse principle:
+
+> Reuse the kata. Compute only the delta.
+
+Japanese:
+
+> 型を使え。差分だけ計算せよ。
+
+v0.3 sharpens the protocol into a routing principle:
+
+> Route to the lightest sufficient layer.
+
+Japanese:
+
+> 最も軽く十分な層へ流せ。
+
+v0.4 sharpens the protocol into a trace principle:
+
+> No breath without trace.
+
+Japanese:
+
+> 痕跡なき呼吸なし。
+
+v0.5 sharpens the protocol into a return principle:
+
+> Saved compute should return value to traceable origin.
+
+Japanese:
+
+> 節約された計算は、痕跡ある震源へ還流せよ。
+
+Together, v0.1 through v0.5 form the first arc of the Computational Pranayama Protocol:
+
+```text
+Breath
+→ Kata
+→ Route
+→ Trace
+→ Return
+```
+
+Japanese:
+
+```text
+呼吸
+→ 型
+→ 経路
+→ 痕跡
+→ 還流
+```
+
+This first arc defines the **Breath Core** of an AI civilization metabolism layer.
+
+The purpose is not to maximize computation.
+
+The purpose is to regulate computation so that AI systems compute only what is necessary, where it is necessary, when it is necessary, with traceable accountability.
+
+In this view, overcompute is not progress.
+
+Overcompute is metabolic disorder.
+
+A sustainable AI civilization requires computation that can breathe, remember, route, trace, and return.
+
+Compute like wind.
+
