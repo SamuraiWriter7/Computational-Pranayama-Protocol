@@ -12,7 +12,12 @@ VALIDATIONS = [
         "name": "Computational Breath Cycle",
         "schema": ROOT / "schemas" / "computational-breath-cycle.schema.json",
         "example": ROOT / "examples" / "computational-breath-cycle.example.yaml",
-    }
+    },
+    {
+        "name": "Kata Memory Record",
+        "schema": ROOT / "schemas" / "kata-memory-record.schema.json",
+        "example": ROOT / "examples" / "kata-memory-record.example.yaml",
+    },
 ]
 
 
