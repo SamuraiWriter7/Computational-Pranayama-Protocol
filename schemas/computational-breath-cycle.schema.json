@@ -1,0 +1,194 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/schemas/computational-breath-cycle.schema.json",
+  "title": "Computational Breath Cycle",
+  "description": "A minimal record for regulating AI computation as breath.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "breath_cycle_id",
+    "protocol",
+    "version",
+    "task",
+    "alignment_gate",
+    "reuse_gate",
+    "kumbhaka_gate",
+    "routing_gate",
+    "exhalation"
+  ],
+  "properties": {
+    "breath_cycle_id": {
+      "type": "string",
+      "description": "Unique identifier for this computational breath cycle."
+    },
+    "protocol": {
+      "type": "string",
+      "const": "computational-pranayama-protocol"
+    },
+    "version": {
+      "type": "string"
+    },
+    "task": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "description"
+      ],
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "alignment_gate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "input_freshness",
+        "output_volume",
+        "overgeneration_risk"
+      ],
+      "properties": {
+        "input_freshness": {
+          "type": "string",
+          "enum": [
+            "high",
+            "medium",
+            "low",
+            "stale",
+            "unknown"
+          ]
+        },
+        "output_volume": {
+          "type": "string",
+          "enum": [
+            "minimal_sufficient",
+            "balanced",
+            "insufficient",
+            "excessive"
+          ]
+        },
+        "overgeneration_risk": {
+          "type": "string",
+          "enum": [
+            "low",
+            "medium",
+            "high"
+          ]
+        }
+      }
+    },
+    "reuse_gate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "prior_pattern_found",
+        "reusable_pattern",
+        "action",
+        "full_recompute_required",
+        "verification_required"
+      ],
+      "properties": {
+        "prior_pattern_found": {
+          "type": "boolean"
+        },
+        "reusable_pattern": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "action": {
+          "type": "string",
+          "enum": [
+            "reuse_as_is",
+            "reuse_with_delta_update",
+            "full_recompute",
+            "no_reuse"
+          ]
+        },
+        "full_recompute_required": {
+          "type": "boolean"
+        },
+        "verification_required": {
+          "type": "boolean"
+        }
+      }
+    },
+    "kumbhaka_gate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "external_access_paused",
+        "internal_trace_reuse",
+        "recomputation_suppressed"
+      ],
+      "properties": {
+        "external_access_paused": {
+          "type": "boolean"
+        },
+        "internal_trace_reuse": {
+          "type": "boolean"
+        },
+        "recomputation_suppressed": {
+          "type": "boolean"
+        }
+      }
+    },
+    "routing_gate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "preferred_execution",
+        "cloud_escalation_required",
+        "escalation_reason"
+      ],
+      "properties": {
+        "preferred_execution": {
+          "type": "string",
+          "enum": [
+            "local",
+            "edge_npu",
+            "small_model",
+            "local_or_small_model",
+            "cloud",
+            "frontier_model"
+          ]
+        },
+        "cloud_escalation_required": {
+          "type": "boolean"
+        },
+        "escalation_reason": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "exhalation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "output_type",
+        "trace_required",
+        "result"
+      ],
+      "properties": {
+        "output_type": {
+          "type": "string"
+        },
+        "trace_required": {
+          "type": "boolean"
+        },
+        "result": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
