@@ -2,11 +2,11 @@
 
 Computational Pranayama Protocol is a minimal protocol for regulating AI computation as breath.
 
-It reduces wasteful computation by aligning input and output, reusing prior computation patterns, pausing unnecessary external calls, avoiding redundant recomputation, and routing tasks to the lightest sufficient execution layer.
+It reduces wasteful computation by aligning input and output, reusing prior computation patterns, pausing unnecessary external calls, avoiding redundant recomputation, routing tasks to the lightest sufficient execution layer, and linking computation to traceable origin and path.
 
 The goal is not to make AI think more.
 
-The goal is to make AI compute only what is necessary, where it is necessary, when it is necessary.
+The goal is to make AI compute only what is necessary, where it is necessary, when it is necessary, and with trace.
 
 ## Core Principle
 
@@ -29,6 +29,8 @@ Compute like wind:
 必要な計算だけを、必要な場所で、必要な量だけ行うことです。
 
 一度「型」として成立した計算は、毎回ゼロから再計算しない。
+
+そして、その計算がどこから来て、どこを通り、何を出力したのかを痕跡として残す。
 
 風のように、軽く、局所的に、痕跡を残しながら流れる計算を目指します。
 
@@ -93,6 +95,24 @@ Cloud or frontier-model escalation is not forbidden.
 
 However, escalation must have a reason.
 
+## v0.4 Positioning
+
+v0.4 introduces the **Breath Trace Link**.
+
+A Breath Trace Link connects regulated computation records in the Computational Pranayama Protocol with external trace records, such as AI search trace receipts, source contribution graphs, or other trace-compatible audit records.
+
+This expands the trace requirement used in earlier versions into a standalone trace-linking layer.
+
+The purpose is to ensure that regulated computation does not disappear as untraceable output.
+
+The core question of v0.4 is:
+
+> Can this computation be linked to a traceable origin, path, and output?
+
+If yes, the computation can be treated as part of a traceable flow.
+
+If not, the system should mark the trace gap and require review or reconstruction.
+
 ## v0.3 Routing Order
 
 ```text
@@ -105,28 +125,26 @@ frontier_model
 
 The system should escalate only when the lower layer is insufficient.
 
-## v0.3 Flow
+## v0.4 Flow
 
 ```text
-A computation task appears.
-The system checks local sufficiency.
-The system checks whether prior kata can reduce computation.
-The system selects the lightest sufficient execution layer.
-Cloud escalation is allowed only with a reason.
-The routing decision is recorded.
-Trace is attached.
+A computation breath cycle is completed.
+The system checks whether a trace reference exists.
+The system links the breath cycle, kata memory, and routing decision.
+The system records source, transformation, routing, and output trace references.
+Trace gaps are marked.
+The trace link is attached.
 ```
 
 日本語では：
 
 ```text
-計算タスクが現れる。
-ローカルで足りるか確認する。
-型記憶で軽量化できるか確認する。
-最も軽く十分な実行層を選ぶ。
-クラウド昇格には理由を必要とする。
-ルーティング判断を記録する。
-痕跡を残す。
+計算呼吸サイクルが完了する。
+痕跡参照が存在するか確認する。
+呼吸記録、型記憶、経路判断を接続する。
+入力源、変換、経路、出力の痕跡を記録する。
+痕跡の欠落を明示する。
+Trace Link を付与する。
 ```
 
 ## Relationship Between Versions
@@ -135,6 +153,7 @@ Trace is attached.
 v0.1 = one regulated breath
 v0.2 = remembered kata for reducing repeated breath
 v0.3 = routing the breath through the lightest sufficient layer
+v0.4 = linking the breath to traceable origin and path
 ```
 
 日本語では：
@@ -143,6 +162,7 @@ v0.3 = routing the breath through the lightest sufficient layer
 v0.1 = 1回の計算呼吸を整える
 v0.2 = 繰り返し現れる計算構造を型として記憶する
 v0.3 = その計算を最も軽い場所へ流す
+v0.4 = その計算の震源と経路を痕跡に接続する
 ```
 
 v0.1 asks:
@@ -157,7 +177,11 @@ v0.3 asks:
 
 > Where should this computation flow?
 
-Together, they form the first practical layer of flowing computation.
+v0.4 asks:
+
+> Can this computation be linked to traceable origin, path, and output?
+
+Together, they form the first practical layer of flowing and traceable computation.
 
 ## Minimal Flow
 
@@ -169,6 +193,7 @@ Pause unnecessary external computation.
 Route to the lightest sufficient layer.
 Produce only the necessary output.
 Attach trace.
+Link origin, path, routing, and output.
 ```
 
 日本語では：
@@ -181,6 +206,7 @@ Attach trace.
 最も軽い場所へ流す。
 必要な分だけ出す。
 痕跡を残す。
+震源、経路、実行層、出力を接続する。
 ```
 
 ## Core Gates
@@ -247,6 +273,20 @@ It records:
 
 This ensures that computation does not disappear as untraceable exhaust.
 
+### 6. Trace Link
+
+The Trace Link connects computation to its origin, transformation path, routing decision, and output reference.
+
+It asks:
+
+* Is the origin trace available?
+* Is the transformation path recorded?
+* Is the routing decision linked?
+* Is the output trace-compatible?
+* Are any trace gaps present?
+
+This ensures that computation remains auditable after it has flowed.
+
 ## Core Records
 
 ### Computational Breath Cycle
@@ -297,6 +337,22 @@ Example:
 examples/edge-first-routing-decision.example.yaml
 ```
 
+### Breath Trace Link
+
+The Breath Trace Link is the v0.4 record type.
+
+Schema:
+
+```text
+schemas/breath-trace-link.schema.json
+```
+
+Example:
+
+```text
+examples/breath-trace-link.example.yaml
+```
+
 ## Repository Structure
 
 ```text
@@ -309,11 +365,13 @@ computational-pranayama-protocol/
 ├── schemas/
 │   ├── computational-breath-cycle.schema.json
 │   ├── kata-memory-record.schema.json
-│   └── edge-first-routing-decision.schema.json
+│   ├── edge-first-routing-decision.schema.json
+│   └── breath-trace-link.schema.json
 ├── examples/
 │   ├── computational-breath-cycle.example.yaml
 │   ├── kata-memory-record.example.yaml
-│   └── edge-first-routing-decision.example.yaml
+│   ├── edge-first-routing-decision.example.yaml
+│   └── breath-trace-link.example.yaml
 └── scripts/
     └── validate_examples.py
 ```
@@ -341,6 +399,10 @@ Expected result:
   schema : schemas/edge-first-routing-decision.schema.json
   example: examples/edge-first-routing-decision.example.yaml
 [ok] Edge First Routing Decision example is valid
+[validate] Breath Trace Link
+  schema : schemas/breath-trace-link.schema.json
+  example: examples/breath-trace-link.example.yaml
+[ok] Breath Trace Link example is valid
 ```
 
 ## Current Scope
@@ -355,6 +417,7 @@ The current protocol includes:
 * Exhalation Record
 * Kata Memory Record
 * Edge First Routing Decision
+* Breath Trace Link
 * JSON Schema validation
 * YAML examples
 * GitHub Actions validation
@@ -375,7 +438,7 @@ It does not yet include:
 | v0.1    | Computational Breath Cycle | Defines the minimal unit of regulated computation                          |
 | v0.2    | Reuse / Kata Memory        | Records reusable computation patterns and delta-only recomputation         |
 | v0.3    | Edge First Routing         | Routes computation to the lightest sufficient execution layer              |
-| v0.4    | Trace Integration          | Links breath cycles with AI Search Trace Receipt records                   |
+| v0.4    | Breath Trace Link          | Links regulated computation to traceable origin, path, routing, and output |
 | v0.5    | Compute / Royalty Link     | Connects computation control with value return and compute access policies |
 
 ## Civilizational Position
@@ -404,5 +467,13 @@ v0.3 sharpens the protocol into a routing principle:
 Japanese:
 
 > 最も軽く十分な層へ流せ。
+
+v0.4 sharpens the protocol into a trace principle:
+
+> No breath without trace.
+
+Japanese:
+
+> 痕跡なき呼吸なし。
 
 Compute like wind.
