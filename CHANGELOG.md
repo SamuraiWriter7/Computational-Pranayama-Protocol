@@ -4,6 +4,71 @@ All notable changes to this project will be documented in this file.
 
 This project follows a candidate-release style during early protocol formation.
 
+## v0.4.0-candidate
+
+Fourth candidate release of the Computational Pranayama Protocol.
+
+This release introduces the **Breath Trace Link**, a trace-linking record for connecting computational breath cycles, kata memory records, and routing decisions with external trace records.
+
+Where v0.1 defines one regulated breath, v0.2 defines reusable kata, and v0.3 defines where computation should flow, v0.4 defines how the computation is linked to traceable origin and path.
+
+### Added
+
+* Added `Breath Trace Link` as the fourth core record type.
+* Added schema for `breath-trace-link`.
+* Added YAML example for a valid breath trace link.
+* Added `linked_records` fields for connecting breath cycle, kata memory, and routing decision records.
+* Added `origin_trace` fields for identifying input references and source trace references.
+* Added `transformation_trace` fields for describing how input became output.
+* Added `routing_trace` fields for connecting execution-layer decisions.
+* Added `output_trace` fields for final output and trace receipt compatibility.
+* Added `trace_gap_policy` for handling missing or incomplete trace references.
+* Added `trace_status` fields for trace completeness and confidence.
+* Updated validation script to validate v0.1, v0.2, v0.3, and v0.4 examples.
+
+### Validation
+
+The v0.4 schema and example passed validation.
+
+Expected validation output:
+
+```text
+[validate] Computational Breath Cycle
+  schema : schemas/computational-breath-cycle.schema.json
+  example: examples/computational-breath-cycle.example.yaml
+[ok] Computational Breath Cycle example is valid
+[validate] Kata Memory Record
+  schema : schemas/kata-memory-record.schema.json
+  example: examples/kata-memory-record.example.yaml
+[ok] Kata Memory Record example is valid
+[validate] Edge First Routing Decision
+  schema : schemas/edge-first-routing-decision.schema.json
+  example: examples/edge-first-routing-decision.example.yaml
+[ok] Edge First Routing Decision example is valid
+[validate] Breath Trace Link
+  schema : schemas/breath-trace-link.schema.json
+  example: examples/breath-trace-link.example.yaml
+[ok] Breath Trace Link example is valid
+```
+
+### Core Principle
+
+> No breath without trace.
+
+### Japanese Core Principle
+
+> 痕跡なき呼吸なし。
+
+### Positioning
+
+v0.4 turns regulated computation into traceable computation.
+
+The protocol no longer only asks whether computation should be regulated, reused, or routed.
+
+It now asks whether the computation can be connected to its origin, transformation path, routing decision, and output record.
+
+This is the first step toward trace-compatible flowing computation.
+
 ## v0.3.0-candidate
 
 Third candidate release of the Computational Pranayama Protocol.
