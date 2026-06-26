@@ -1,0 +1,310 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/schemas/compute-royalty-link.schema.json",
+  "title": "Compute Royalty Link",
+  "description": "A record for connecting regulated computation with compute access and value return policies.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "compute_royalty_link_id",
+    "protocol",
+    "version",
+    "linked_records",
+    "compute_saving",
+    "compute_access",
+    "value_return",
+    "allocation_policy",
+    "trace",
+    "status"
+  ],
+  "properties": {
+    "compute_royalty_link_id": {
+      "type": "string",
+      "description": "Unique identifier for this compute royalty link."
+    },
+    "protocol": {
+      "type": "string",
+      "const": "computational-pranayama-protocol"
+    },
+    "version": {
+      "type": "string"
+    },
+    "linked_records": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "breath_cycle_id",
+        "kata_memory_id",
+        "routing_decision_id",
+        "breath_trace_link_id"
+      ],
+      "properties": {
+        "breath_cycle_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "kata_memory_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "routing_decision_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "breath_trace_link_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "compute_saving": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "baseline_layer",
+        "selected_layer",
+        "recomputation_avoided",
+        "cloud_escalation_avoided",
+        "saving_level",
+        "confidence"
+      ],
+      "properties": {
+        "baseline_layer": {
+          "type": "string",
+          "enum": [
+            "local",
+            "edge_npu",
+            "small_model",
+            "cloud",
+            "frontier_model",
+            "unknown"
+          ]
+        },
+        "selected_layer": {
+          "type": "string",
+          "enum": [
+            "local",
+            "edge_npu",
+            "small_model",
+            "cloud",
+            "frontier_model",
+            "unknown"
+          ]
+        },
+        "recomputation_avoided": {
+          "type": "boolean"
+        },
+        "cloud_escalation_avoided": {
+          "type": "boolean"
+        },
+        "saving_level": {
+          "type": "string",
+          "enum": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "significant",
+            "unknown"
+          ]
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "compute_access": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "access_policy_required",
+        "access_policy_reference",
+        "execution_allowed",
+        "escalation_requires_policy",
+        "allowed_execution_layers"
+      ],
+      "properties": {
+        "access_policy_required": {
+          "type": "boolean"
+        },
+        "access_policy_reference": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "execution_allowed": {
+          "type": "boolean"
+        },
+        "escalation_requires_policy": {
+          "type": "boolean"
+        },
+        "allowed_execution_layers": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "local",
+              "edge_npu",
+              "small_model",
+              "cloud",
+              "frontier_model"
+            ]
+          }
+        }
+      }
+    },
+    "value_return": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "value_return_required",
+        "return_mode",
+        "origin_reference",
+        "royalty_os_reference"
+      ],
+      "properties": {
+        "value_return_required": {
+          "type": "boolean"
+        },
+        "return_mode": {
+          "type": "string",
+          "enum": [
+            "none",
+            "attribution",
+            "credit",
+            "royalty",
+            "compute_access_allocation",
+            "mixed"
+          ]
+        },
+        "origin_reference": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "royalty_os_reference": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "allocation_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "allocation_required",
+        "allocation_basis",
+        "recipients"
+      ],
+      "properties": {
+        "allocation_required": {
+          "type": "boolean"
+        },
+        "allocation_basis": {
+          "type": "string",
+          "enum": [
+            "none",
+            "origin_contribution",
+            "compute_saved",
+            "trace_provided",
+            "kata_reuse",
+            "mixed"
+          ]
+        },
+        "recipients": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "recipient_type",
+              "reference",
+              "share_ratio"
+            ],
+            "properties": {
+              "recipient_type": {
+                "type": "string",
+                "enum": [
+                  "origin_creator",
+                  "kata_author",
+                  "trace_provider",
+                  "compute_provider",
+                  "protocol_maintainer",
+                  "other"
+                ]
+              },
+              "reference": {
+                "type": "string"
+              },
+              "share_ratio": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            }
+          }
+        }
+      }
+    },
+    "trace": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "trace_required",
+        "trace_reference",
+        "trace_receipt_compatible"
+      ],
+      "properties": {
+        "trace_required": {
+          "type": "boolean"
+        },
+        "trace_reference": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "trace_receipt_compatible": {
+          "type": "boolean"
+        }
+      }
+    },
+    "status": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "link_status",
+        "review_required"
+      ],
+      "properties": {
+        "link_status": {
+          "type": "string",
+          "enum": [
+            "active",
+            "partial",
+            "pending_review",
+            "rejected"
+          ]
+        },
+        "review_required": {
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}
+
