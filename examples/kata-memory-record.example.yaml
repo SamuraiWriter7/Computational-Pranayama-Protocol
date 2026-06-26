@@ -1,0 +1,61 @@
+kata_memory_id: kata-2026-0001
+protocol: computational-pranayama-protocol
+version: 0.2.0-candidate
+
+source:
+  source_breath_cycle_id: cpp-2026-0001
+  source_task_type: release_candidate_generation
+
+kata:
+  name: Candidate Release Notes Pattern
+  description: A reusable structure for generating candidate release notes for protocol repositories.
+  pattern_type: release_notes
+  reusable_parts:
+    - release_title
+    - what_this_release_adds
+    - validation_summary
+    - scope_statement
+    - core_principle
+    - civilizational_position
+  non_reusable_parts:
+    - version_number
+    - protocol_name
+    - schema_name
+    - example_name
+    - validation_output
+  stability: candidate
+
+reuse_policy:
+  reuse_allowed: true
+  reuse_mode: reuse_with_delta_update
+  minimum_similarity_score: 0.8
+
+delta_policy:
+  delta_required: true
+  delta_fields:
+    - version_number
+    - record_type
+    - added_features
+    - validation_result
+
+recompute_policy:
+  full_recompute_allowed: true
+  full_recompute_triggers:
+    - changed_requirements
+    - low_similarity
+    - stale_pattern
+    - human_requested_recheck
+    - conflict_detected
+
+verification:
+  verification_required: true
+  verification_scope:
+    - version_number
+    - schema_name
+    - example_name
+    - validation_status
+    - release_scope
+
+trace:
+  trace_required: true
+  trace_reference: ai-search-trace-receipt-compatible
