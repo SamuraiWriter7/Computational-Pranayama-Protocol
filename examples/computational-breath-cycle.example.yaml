@@ -1,0 +1,37 @@
+breath_cycle_id: cpp-2026-0001
+protocol: computational-pranayama-protocol
+version: 0.1.0-candidate
+
+task:
+  type: structured_spec_refinement
+  description: Refine prior concepts into a minimal protocol for flowing computation.
+
+alignment_gate:
+  input_freshness: high
+  output_volume: minimal_sufficient
+  overgeneration_risk: low
+
+reuse_gate:
+  prior_pattern_found: true
+  reusable_pattern:
+    - protocol_definition
+    - gate_structure
+    - yaml_record_format
+  action: reuse_with_delta_update
+  full_recompute_required: false
+  verification_required: true
+
+kumbhaka_gate:
+  external_access_paused: true
+  internal_trace_reuse: true
+  recomputation_suppressed: true
+
+routing_gate:
+  preferred_execution: local_or_small_model
+  cloud_escalation_required: false
+  escalation_reason: null
+
+exhalation:
+  output_type: minimal_spec
+  trace_required: true
+  result: flowing_compute
