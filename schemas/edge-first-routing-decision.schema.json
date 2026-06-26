@@ -1,0 +1,242 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/schemas/edge-first-routing-decision.schema.json",
+  "title": "Edge First Routing Decision",
+  "description": "A routing record for selecting the lightest sufficient execution layer for AI computation.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "routing_decision_id",
+    "protocol",
+    "version",
+    "task",
+    "available_layers",
+    "routing_assessment",
+    "selected_layer",
+    "cloud_escalation_policy",
+    "fallback_policy",
+    "trace"
+  ],
+  "properties": {
+    "routing_decision_id": {
+      "type": "string",
+      "description": "Unique identifier for this routing decision."
+    },
+    "protocol": {
+      "type": "string",
+      "const": "computational-pranayama-protocol"
+    },
+    "version": {
+      "type": "string"
+    },
+    "task": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "task_type",
+        "description",
+        "privacy_sensitivity",
+        "compute_intensity"
+      ],
+      "properties": {
+        "task_type": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "privacy_sensitivity": {
+          "type": "string",
+          "enum": [
+            "low",
+            "medium",
+            "high",
+            "critical"
+          ]
+        },
+        "compute_intensity": {
+          "type": "string",
+          "enum": [
+            "low",
+            "medium",
+            "high",
+            "extreme"
+          ]
+        }
+      }
+    },
+    "available_layers": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "layer",
+          "available",
+          "sufficient"
+        ],
+        "properties": {
+          "layer": {
+            "type": "string",
+            "enum": [
+              "local",
+              "edge_npu",
+              "small_model",
+              "cloud",
+              "frontier_model"
+            ]
+          },
+          "available": {
+            "type": "boolean"
+          },
+          "sufficient": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "routing_assessment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "local_sufficiency",
+        "kata_available",
+        "latency_tolerance",
+        "cloud_needed",
+        "frontier_needed"
+      ],
+      "properties": {
+        "local_sufficiency": {
+          "type": "string",
+          "enum": [
+            "sufficient",
+            "partially_sufficient",
+            "insufficient",
+            "unknown"
+          ]
+        },
+        "kata_available": {
+          "type": "boolean"
+        },
+        "latency_tolerance": {
+          "type": "string",
+          "enum": [
+            "low",
+            "medium",
+            "high"
+          ]
+        },
+        "cloud_needed": {
+          "type": "boolean"
+        },
+        "frontier_needed": {
+          "type": "boolean"
+        }
+      }
+    },
+    "selected_layer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "layer",
+        "reason",
+        "cloud_escalation_required"
+      ],
+      "properties": {
+        "layer": {
+          "type": "string",
+          "enum": [
+            "local",
+            "edge_npu",
+            "small_model",
+            "cloud",
+            "frontier_model"
+          ]
+        },
+        "reason": {
+          "type": "string"
+        },
+        "cloud_escalation_required": {
+          "type": "boolean"
+        }
+      }
+    },
+    "cloud_escalation_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "escalation_allowed",
+        "escalation_reason_required",
+        "allowed_triggers"
+      ],
+      "properties": {
+        "escalation_allowed": {
+          "type": "boolean"
+        },
+        "escalation_reason_required": {
+          "type": "boolean"
+        },
+        "allowed_triggers": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "local_insufficient",
+              "high_accuracy_required",
+              "fresh_external_information_required",
+              "large_context_required",
+              "human_requested_escalation",
+              "safety_review_required"
+            ]
+          }
+        }
+      }
+    },
+    "fallback_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "fallback_allowed",
+        "fallback_order"
+      ],
+      "properties": {
+        "fallback_allowed": {
+          "type": "boolean"
+        },
+        "fallback_order": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "local",
+              "edge_npu",
+              "small_model",
+              "cloud",
+              "frontier_model"
+            ]
+          }
+        }
+      }
+    },
+    "trace": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "trace_required",
+        "trace_reference"
+      ],
+      "properties": {
+        "trace_required": {
+          "type": "boolean"
+        },
+        "trace_reference": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    }
+  }
+}
