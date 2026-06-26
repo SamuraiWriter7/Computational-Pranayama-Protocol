@@ -28,6 +28,11 @@ VALIDATIONS = [
         "schema": ROOT / "schemas" / "breath-trace-link.schema.json",
         "example": ROOT / "examples" / "breath-trace-link.example.yaml",
     },
+    {
+        "name": "Compute Royalty Link",
+        "schema": ROOT / "schemas" / "compute-royalty-link.schema.json",
+        "example": ROOT / "examples" / "compute-royalty-link.example.yaml",
+    },
 ]
 
 
@@ -76,5 +81,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-
 
