@@ -1,0 +1,42 @@
+breath_trace_link_id: trace-link-2026-0001
+protocol: computational-pranayama-protocol
+version: 0.4.0-candidate
+
+linked_records:
+  breath_cycle_id: cpp-2026-0001
+  kata_memory_id: kata-2026-0001
+  routing_decision_id: route-2026-0001
+
+origin_trace:
+  origin_available: true
+  input_references:
+    - human_prompt
+    - prior_protocol_context
+    - local_repository_files
+  source_trace_reference: ai-search-trace-receipt-compatible
+
+transformation_trace:
+  transformation_recorded: true
+  transformation_type: schema_generation
+  transformation_summary: Generated a trace-linking record from prior breath, kata, and routing records.
+
+routing_trace:
+  routing_recorded: true
+  selected_layer: local
+  routing_reference: route-2026-0001
+
+output_trace:
+  output_recorded: true
+  output_type: protocol_schema_and_example
+  trace_receipt_compatible: true
+  output_trace_reference: breath-trace-link.example.yaml
+
+trace_gap_policy:
+  trace_gap_detected: false
+  gap_types: []
+  required_action: none
+
+trace_status:
+  status: complete
+  trace_confidence: 0.92
+
