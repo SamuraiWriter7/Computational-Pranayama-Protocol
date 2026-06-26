@@ -1,0 +1,238 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/schemas/breath-trace-link.schema.json",
+  "title": "Breath Trace Link",
+  "description": "A trace-linking record for connecting regulated computation with traceable origin, path, routing, and output references.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "breath_trace_link_id",
+    "protocol",
+    "version",
+    "linked_records",
+    "origin_trace",
+    "transformation_trace",
+    "routing_trace",
+    "output_trace",
+    "trace_gap_policy",
+    "trace_status"
+  ],
+  "properties": {
+    "breath_trace_link_id": {
+      "type": "string",
+      "description": "Unique identifier for this breath trace link."
+    },
+    "protocol": {
+      "type": "string",
+      "const": "computational-pranayama-protocol"
+    },
+    "version": {
+      "type": "string"
+    },
+    "linked_records": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "breath_cycle_id",
+        "kata_memory_id",
+        "routing_decision_id"
+      ],
+      "properties": {
+        "breath_cycle_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "kata_memory_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "routing_decision_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "origin_trace": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "origin_available",
+        "input_references",
+        "source_trace_reference"
+      ],
+      "properties": {
+        "origin_available": {
+          "type": "boolean"
+        },
+        "input_references": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "source_trace_reference": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "transformation_trace": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "transformation_recorded",
+        "transformation_type",
+        "transformation_summary"
+      ],
+      "properties": {
+        "transformation_recorded": {
+          "type": "boolean"
+        },
+        "transformation_type": {
+          "type": "string",
+          "enum": [
+            "summarization",
+            "refinement",
+            "schema_generation",
+            "routing_decision",
+            "reuse_with_delta_update",
+            "validation",
+            "other"
+          ]
+        },
+        "transformation_summary": {
+          "type": "string"
+        }
+      }
+    },
+    "routing_trace": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "routing_recorded",
+        "selected_layer",
+        "routing_reference"
+      ],
+      "properties": {
+        "routing_recorded": {
+          "type": "boolean"
+        },
+        "selected_layer": {
+          "type": "string",
+          "enum": [
+            "local",
+            "edge_npu",
+            "small_model",
+            "cloud",
+            "frontier_model",
+            "unknown"
+          ]
+        },
+        "routing_reference": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "output_trace": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "output_recorded",
+        "output_type",
+        "trace_receipt_compatible",
+        "output_trace_reference"
+      ],
+      "properties": {
+        "output_recorded": {
+          "type": "boolean"
+        },
+        "output_type": {
+          "type": "string"
+        },
+        "trace_receipt_compatible": {
+          "type": "boolean"
+        },
+        "output_trace_reference": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "trace_gap_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "trace_gap_detected",
+        "gap_types",
+        "required_action"
+      ],
+      "properties": {
+        "trace_gap_detected": {
+          "type": "boolean"
+        },
+        "gap_types": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "missing_origin",
+              "missing_source_reference",
+              "missing_transformation_trace",
+              "missing_routing_trace",
+              "missing_output_trace",
+              "unknown_execution_layer"
+            ]
+          }
+        },
+        "required_action": {
+          "type": "string",
+          "enum": [
+            "none",
+            "mark_gap",
+            "reconstruct_trace",
+            "human_review",
+            "reject_output"
+          ]
+        }
+      }
+    },
+    "trace_status": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "trace_confidence"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "complete",
+            "partial",
+            "missing",
+            "rejected"
+          ]
+        },
+        "trace_confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    }
+  }
+}
+
